@@ -99,7 +99,13 @@ public class Practice {
    * @return A set containing all reachable leaf vertices, or an empty set if vertex is null.
    */
   public <T> Set<Vertex<T>> leaves(Vertex<T> vertex) {
-    return null;
+    Set<Vertex<T>> result = new HashSet<>();
+    for (Vertex<T> v : reachable(vertex)) {
+        if (v.neighbors == null || v.neighbors.isEmpty()) {
+            result.add(v);
+        }
+    }
+    return result;
   }
 
 
@@ -114,6 +120,9 @@ public class Practice {
    * @return true if all reachable vertices hold odd values, false otherwise
    */
   public boolean allOdd(Vertex<Integer> vertex) {
+    for (Vertex<Integer> v : reachable(vertex)) {
+        if (v.data % 2 == 0) return false;
+    }
     return true;
   }
 
