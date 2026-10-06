@@ -1,3 +1,6 @@
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -18,6 +21,24 @@ public class Practice {
    * @param vertex The starting vertex for the traversal.
    */
   public <T> void printVertexVals(Vertex<T> vertex) {
+    if (vertex == null) return;
+
+    Set<Vertex<T>> visited = new HashSet<>();
+    Deque<Vertex<T>> stack = new ArrayDeque<>();
+    stack.push(vertex);
+
+    while (!stack.isEmpty()) {
+        Vertex<T> current = stack.pop();
+        if (!visited.add(current)) continue; // already printed
+
+        System.out.println(current.data);
+
+        for (Vertex<T> neighbor : current.neighbors) {
+            if (neighbor != null && !visited.contains(neighbor)) {
+                stack.push(neighbor);
+            }
+        }
+    }
   }
 
   /**
