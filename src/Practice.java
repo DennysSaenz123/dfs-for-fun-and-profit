@@ -80,7 +80,11 @@ public class Practice {
    * @return The maximum value of any reachable vertex, or Integer.MIN_VALUE if vertex is null.
    */
   public int max(Vertex<Integer> vertex) {
-    return -1;
+    int max = Integer.MIN_VALUE;
+    for (Vertex<Integer> v : reachable(vertex)) {
+        max = Math.max(max, v.data);
+    }
+    return max;
   }
 
   /**
