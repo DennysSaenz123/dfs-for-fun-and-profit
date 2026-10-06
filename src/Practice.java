@@ -51,7 +51,23 @@ public class Practice {
    * @return A set containing all reachable vertices, or an empty set if vertex is null.
    */
   public <T> Set<Vertex<T>> reachable(Vertex<T> vertex) {
-    return null;
+    Set<Vertex<T>> visited = new HashSet<>();
+    if (vertex == null) return visited;
+
+    Deque<Vertex<T>> stack = new ArrayDeque<>();
+    stack.push(vertex);
+
+    while (!stack.isEmpty()) {
+        Vertex<T> current = stack.pop();
+        if (!visited.add(current)) continue;
+
+        for (Vertex<T> neighbor : current.neighbors) {
+            if (neighbor != null && !visited.contains(neighbor)) {
+                stack.push(neighbor);
+            }
+        }
+    }
+    return visited;
   }
 
   /**
